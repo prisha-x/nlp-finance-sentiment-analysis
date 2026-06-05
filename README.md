@@ -58,8 +58,14 @@ the first notebook.
 ## Status
 
 Work in progress. Started May 2026.
-Results, findings, and honest limitations will be documented here
-as the project develops.
+
+**Current results (EDA + Modeling complete):**
+- LinearSVC: 0.73 weighted F1
+- Logistic Regression: 0.73 weighted F1  
+- Naive Bayes: 0.67 weighted F1
+- VADER baseline: 0.54 weighted F1
+
+All trained models beat the zero-shot VADER baseline by 18+ points. Error analysis shows the main failure mode is positive/neutral confusion — a known limitation of bag-of-words approaches that FinBERT should address.
 
 
 *Extended independently from my Inspirit AI Scholars Program project
