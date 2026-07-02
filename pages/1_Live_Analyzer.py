@@ -1,6 +1,10 @@
 import streamlit as st
 import sys
-sys.path.append('.')
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from src.signals import get_signal
 from transformers import pipeline
@@ -11,8 +15,8 @@ st.markdown("Enter a financial headline to get a sentiment classification and tr
 
 @st.cache_resource
 def load_models():
-    vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
-    lsvc = joblib.load('models/linearsvc_model.pkl')
+    vectorizer = joblib.load(ROOT_DIR / 'models' / 'tfidf_vectorizer.pkl')
+    lsvc = joblib.load(ROOT_DIR / 'models' / 'linearsvc_model.pkl')
     finbert = pipeline("text-classification", model="ProsusAI/finbert")
     return vectorizer, lsvc, finbert
 
@@ -56,8 +60,8 @@ if headline:
             st.info("⚪ HOLD")
 
         if signal == 'BUY':
-            st.caption("High positive sentiment detected — historically, high-confidence signals like this led to positive returns 53.3% of the time in our test data.")
+            st.caption("High positive sentiment detected - historically, high-confidence signals like this led to positive returns 53.3% of the time in our test data.")
         elif signal == 'SELL':
-            st.caption("High negative sentiment detected — a signal like this historically preceded downward price movement in our test data.")
+            st.caption("High negative sentiment detected - a signal like this historically preceded downward price movement in our test data.")
         else:
             st.caption("Sentiment isn't strong enough either way to generate a confident trading signal.")
