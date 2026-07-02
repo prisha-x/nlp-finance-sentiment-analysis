@@ -1,13 +1,16 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
 
 st.title("Backtesting Results Explorer")
 st.markdown("Comparing sentiment-driven strategy against buy-and-hold on AAPL 2020-2023.")
 
 # cumulative returns chart
 st.subheader("Cumulative Returns")
-st.image("images/cumulative_returns.png")
+st.image(ROOT_DIR / "images" / "cumulative_returns.png")
 
 # model comparison table
 st.subheader("Model Comparison")

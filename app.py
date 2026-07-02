@@ -1,6 +1,10 @@
 import streamlit as st
 import sys
-sys.path.append('.')
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from src.signals import generate_signals
 import pandas as pd
